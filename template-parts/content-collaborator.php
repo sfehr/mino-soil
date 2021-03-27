@@ -7,10 +7,11 @@
  * @package Mino_Soil
  */
 
+$templateName = basename( get_page_template(), '.php' );
 $mediaImages = ms_output_file_list( 'imgs', '' );
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> data-title="<?php echo get_post_field( 'post_name', get_the_ID() ); ?>">
+<article id="post-<?php the_ID(); ?>" <?php post_class( $templateName ); ?> data-title="<?php echo get_post_field( 'post_name', get_the_ID() ); ?>">
 
 	<?php 
 	// print this block only when images are set

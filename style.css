@@ -1010,12 +1010,25 @@ body{
 	line-height: 140%;
 	font-weight: var(--type-weight);
 	color: black;
+
+	/* font antialising setting */
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;		
 }
-/*
-.site-main{
-    display: grid;
+
+p,
+.collab-content{
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	overflow: -moz-scrollbars-none;
 }
-*/
+
+p::-webkit-scrollbar,
+.collab-content::-webkit-scrollbar
+{
+	display: none !important;
+	width: 0 !important;
+}
 
 a,
 a:hover,
@@ -1152,6 +1165,7 @@ svg{
 	z-index: 1;
     width: 100%;
     height: 100%;
+	cursor: pointer;
 }
 
 /* Navigation
@@ -1283,8 +1297,8 @@ svg{
 }
 
 .tmpl-teaser .container-media .itm-img img{
-	max-width: var(--grid-column-w);
-	max-height: var(--grid-column-w);
+/*	max-width: var(--grid-column-w); */
+	max-height: 400px;
 	width: unset;
 }
 
@@ -1317,7 +1331,6 @@ svg{
 	height: calc( ( 100vh - (var(--logo-size-h) * 2.5 ) ) / 2 );
 	margin: 0;
 }
-
 
 .collaborator .collab-part.container-media{
 	overflow: hidden;
@@ -1415,7 +1428,6 @@ svg{
 .entry-content{
 	margin: 0;
 	padding: 0;
-	position: absolute;
 	padding-top: calc( var(--logo-size-h) * 2.5 );
 	height: calc( 100vh - ( var(--logo-size-h) * 1.5 ) );
 
@@ -1426,20 +1438,30 @@ svg{
 .entry-content p,
 .collab-content p
 {
-	line-height: initial;
-	overflow: scroll;
 	margin: 0;
 	margin-bottom: var(--logo-size-h);
 }
-/*
+
 .entry-content p{
+	overflow: scroll;
+	line-height: initial;
 	margin-right: 20px;
 }
-*/
-.entry-content p:not( .tmpl-teaser .entry-content p ){
+
+.tmpl-chapter .entry-content p{
 	grid-row: 1;
 	width: var(--grid-column-w);
-	margin-right: 20px;
+}
+
+/* Brand story template */
+.tmpl-brand-story .entry-content{
+	width: 50vw;
+	min-width: var(--grid-column-w);
+}
+
+/* Chapter template */
+.tmpl-chapter .entry-content{
+	width: min-content;
 }
 
 /* Teaser template */
@@ -1467,6 +1489,32 @@ svg{
 	justify-content: center;
 	text-align: center;
 }
+
+.tmpl-teaser .container-text .entry-content p{
+	margin: 0;
+}
+
+/* Collaborator */
+.collab-content p,
+.tmpl-contact .entry-content p
+{
+	line-height: unset;
+}
+
+/* text only collaborator entry */
+.collaborator.tmpl-collaborator_text .collab-part.collab-content{
+	padding: 0;
+	height: auto;
+}
+.tmpl-collaborator_text .collab-content p{
+	line-height: initial;
+}
+
+/* Contact template */
+.tmpl-contact .entry-content{
+	height: auto;
+}
+
 
 /* Views
 --------------------------------------------- */
@@ -1674,10 +1722,14 @@ svg{
 	.tmpl-teaser .container-text
 	{
 		padding-left: 15px;
-	}	
+	}
 
-	.entry-content p:not(.tmpl-teaser .entry-content p) {
+	.entry-content p:not(.tmpl-teaser .entry-content p),
+	.tmpl-brand-story .entry-content,
+	.tmpl-chapter .entry-content
+	{
 		width: auto;
+		min-width: unset;
 	}
 
 	.tmpl-teaser .container-text .entry-title {

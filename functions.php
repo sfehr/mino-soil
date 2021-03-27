@@ -399,8 +399,8 @@ function ms_custom_wp_query(){
 	$args[ 'post_type' ] = 'collaborator';
 	$args[ 'posts_per_page' ] = -1;
 	$args[ 'post_status' ] = 'publish';
-	$args[ 'orderby' ] = 'date';
-	$args[ 'order' ] = 'asc';
+/*	$args[ 'orderby' ] = 'date';
+	$args[ 'order' ] = 'asc'; */
 	
 	// LOOP
 	$ms_query = null;
@@ -439,9 +439,26 @@ function ms_custom_wp_query(){
  */
 function ms_custom_head( ) { 
 	
+	// smooth scroll polyfill
 	echo'
 		<script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>	
 	';
+
+	// JP font
+	/*
+	echo '
+		<script>
+	(function(d) {
+		var config = {
+		kitId: \'ept0bzo\',
+		scriptTimeout: 3000,
+		async: true
+		},
+		h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src=\'https://use.typekit.net/\'+config.kitId+\'.js\';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+	})(document);
+	</script>
+	';
+	*/
 
 }; 
 add_filter( 'wp_head', 'ms_custom_head', 10, 1 ); 

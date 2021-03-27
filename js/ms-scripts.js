@@ -1,15 +1,11 @@
 /* Todo:
     – initial page load
-    - push state to URI
     - section UI title fade in out animation
     - overview animation / calculation ?
     - logo animation
-    – touch events (scroll) ?
     - arrow micro interaction
-    - media queries
     - sound
-    - horizontal scroll  (collab-content) bug
-    - resize touchmove return
+    - iphone image quality
 */
 
 
@@ -22,7 +18,7 @@ let indexCurrentSub = 0;
 let ms_vw = Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 );
 let ms_vh = Math.max( document.documentElement.clientHeight || 0, window.innerHeight || 0 );
 let imageClock = '';
-let scrollableElements = [ 'p', '.collab-content' ]
+let scrollableElements = [ 'p', 'collab-content' ]
 
 document.addEventListener(　'DOMContentLoaded', (　event　) => {
 	
@@ -409,23 +405,21 @@ function updateNavigation( ele ){
 // Horizontal scroll
 function horizontalScroll(){
 
-    // return if its a touchdevice
-/*    if( isTouchDevice() ) { return } */
-
     // handles the scroll event
     function horizotnalScrollHandler( event ) {
-    
-        //const scrollDirection = ( (transform + event.deltaY * -0.5) > transform ) ? 'left' : 'right'
-        const tagName = event.target.tagName.toLowerCase()
-        const isAtBottom = event.target.classList.contains( 'bottom' )
-        const isAtTop = event.target.classList.contains( 'top' )
 
-        //console.log( tagName )
-        //console.log( event.target.parentElement )
+        const parentClassList = [... event.target.parentElement.classList]
+        const collabItem = inArray( [ 'collab-content' ], parentClassList, false )   
+        const scrollingElement = collabItem ? event.target.parentElement : event.target
+        const scrollingElementTagName = scrollingElement.tagName.toLowerCase()
+        const scrollingElementClassList = scrollingElement.classList
+        const isScrollableElement = scrollingElementTagName === 'p' || scrollingElementClassList.contains( 'collab-content' ) ? true : false
+        const isAtBottom = scrollingElement.classList.contains( 'bottom' )
+        const isAtTop = scrollingElement.classList.contains( 'top' )
 
-        // create a chain scrolling
-        //if( tagName === 'p' && isAtBottom === false && isAtTop === false ){
-        if( inArray( [ tagName ], scrollableElements, false ) && isAtBottom === false && isAtTop === false ){    
+        // create a chain scrolling effect: for elements that are supposed to scroll normal 
+        if( isScrollableElement && isAtBottom === false && isAtTop === false ){    
+            console.log( 'return' )
             return
         }
 
@@ -450,7 +444,6 @@ function horizontalScroll(){
     transform = Math.max( Math.min( 0, transform ), -max ) // ristrict transform in case scrollWidth had changed
     ele.style.transform = `translateX(${transform}px)`
     ele.onwheel = horizotnalScrollHandler
-//    document.onwheel = horizotnalScrollHandler
 }
 
 
@@ -533,10 +526,7 @@ function imageDimension(){
 
     // loop throught the images and recalculate its dimesnions
     images.forEach( item => {
-/*
-        item.removeAttribute( 'width' )
-        item.removeAttribute( 'height' )
-*/        
+        
         // get dimensions
         const imgW = item.getAttribute( 'width' )
         const imgH = item.getAttribute( 'height' )
@@ -566,16 +556,19 @@ function checkScrollPosition(){
     function checkHandler( event ){
 
         const ele = event.target || event
+        const threshold = 10 // to prevent bounce scrolling in safari
+        console.log( ele )
+        console.log( ele.scrollHeight - ele.scrollTop )
 
         // bottom
-        if( ele.scrollHeight - ele.scrollTop === ele.getBoundingClientRect().height ){
+        if( ele.scrollHeight - ele.scrollTop - threshold <= ele.getBoundingClientRect().height ){
             ele.classList.add( 'bottom' )
         } else{
             ele.classList.remove( 'bottom' )
         }
 
         // top
-        if( ele.scrollTop === 0 ){
+        if( ele.scrollTop <= threshold ){
             ele.classList.add( 'top' )
         } else{
             ele.classList.remove( 'top' )
@@ -584,6 +577,13 @@ function checkScrollPosition(){
 
     // init
     selection.forEach( item =>{
+
+        // take parent element of p when it is a collaborator
+        const parentClassList = item.parentElement.classList
+        if( parentClassList.contains( 'collab-content' ) ){
+            item = item.parentElement
+            console.log( item )
+        }
         // reset
         item.onscroll = null
         // initial check

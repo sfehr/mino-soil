@@ -1,5 +1,5 @@
 /*!
-Theme Name: Tajimi Custom Tiles
+Theme Name: Mino Soil
 Theme URI: http://underscores.me/
 Author: Sebastian Fehr
 Author URI: http://www.sebastianfehr.com
@@ -7,14 +7,25 @@ Description: Style Sheet for Japanese language
 Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: LICENSE
-Text Domain: tajimi_custom_tiles
+Text Domain: mino_soil
 */
 
-.entry-content{
-	font-family: neue-haas-grotesk-text, source-han-sans-cjk-ja, sans-serif;
+
+p{
+	font-size: 14px;
+}
+
+.entry-content,
+.collab-content p
+{
+/*	font-family: neue-haas-grotesk-text, source-han-sans-cjk-ja, sans-serif; */
+	font-family: sans-serif;
 	text-align: justify;
 	font-variant-east-asian: proportional-width;
 	line-height: 175% !important;
 }
 
 
+.tmpl-contact .entry-content p{
+	line-height: initial;
+}
