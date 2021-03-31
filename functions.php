@@ -18,6 +18,7 @@
 * ms_get_kses_extended_ruleset()
 * ms_custom_menu_link_attributes()
 * ms_custom_attachment_image_attributes()
+* ms_custom_img_sizes()
 */
 
 
@@ -460,6 +461,27 @@ function ms_custom_head( ) {
 	';
 	*/
 
+	// Social Media
+	echo '
+	<!-- Primary Meta Tags -->
+	<meta name="title" content="MINO SOIL">
+	<meta name="description" content="">
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://minosoil.jp/">
+	<meta property="og:title" content="MINO SOIL">
+	<meta property="og:description" content="">
+	<meta property="og:image" content="http://minosoil.jp/wp/wp-content/uploads/2021/03/ms-og-image.png">
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="https://minosoil.jp/">
+	<meta property="twitter:title" content="MINO SOIL">
+	<meta property="twitter:description" content="">
+	<meta property="twitter:image" content="http://minosoil.jp/wp/wp-content/uploads/2021/03/ms-og-image.png">
+	';		
+
 }; 
 add_filter( 'wp_head', 'ms_custom_head', 10, 1 ); 
 
@@ -489,5 +511,17 @@ function ms_custom_attachment_image_attributes( $atts, $attachment, $size ) {
   add_filter( 'wp_get_attachment_image_attributes', 'ms_custom_attachment_image_attributes', 10, 3 );
   */
 
+
+
+/** SF:
+ * Custom Image Sizes
+ */
+function ms_custom_img_sizes() {
+	
+	update_option( 'medium_large_size_w', 1000 );
+	update_option( 'medium_large_size_h', 1000 );
+
+}
+add_action( 'after_setup_theme', 'ms_custom_img_sizes' );
 
 

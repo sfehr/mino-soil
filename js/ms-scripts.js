@@ -1,11 +1,35 @@
-/* Todo:
-    – initial page load
-    - section UI title fade in out animation
-    - overview animation / calculation ?
+/* plus alpha:
+    - overview animation / calculation
     - logo animation
     - arrow micro interaction
     - sound
-    - iphone image quality
+*/
+
+/*
+*
+* Initial page load
+* Resize Events
+* Key Events
+* UI Interaction
+* siteScrollHandler()
+* horizontalSlide()
+* horizontalSlide()
+* createSiteIndex()
+* getSubIndex()
+* intersectionObserver()
+* inArray()
+* updateUI()
+* updateTitle()
+* updateNavigation()
+* horizontalScroll()
+* setHorizontalScrollPosition()
+* updateURL()
+* imageInterval()
+* imageDimension()
+* checkScrollPosition()
+* isTouchDevice()
+* siteInit()
+*
 */
 
 
@@ -22,6 +46,7 @@ let scrollableElements = [ 'p', 'collab-content' ]
 
 document.addEventListener(　'DOMContentLoaded', (　event　) => {
 	
+    siteInit()
     createSiteIndex()
     intersectionObserver()
     updateUI()
@@ -42,7 +67,6 @@ window.addEventListener(　'resize', (　event　) => {
     if( !isTouchDevice() ){
         siteScrollHandler( indexAll[ indexCurrent ] )
     }
-
 
     // recaluclate image dimensions
     imageDimension();
@@ -347,10 +371,12 @@ function updateUI(){
         document.body.classList.remove( 'view-sub-last' )
     }
     // if only 1 sub section exists no horizontal arrows are needed
-    if( indexSub.length === 1 ){
-        document.body.classList.add( 'no-x-arrows' )
-    } else{ 
+    //if( indexSub.length === 1 ){
+    // limit the horizontal arrows to the chapter template    
+    if( indexAll[ indexCurrent ].classList.contains( 'tmpl-chapter' ) ){
         document.body.classList.remove( 'no-x-arrows' )
+    } else{ 
+        document.body.classList.add( 'no-x-arrows' )
     }
 
     // update section title
@@ -359,7 +385,7 @@ function updateUI(){
     // update navigation
     updateNavigation( indexAll[ indexCurrent ] )
 
-    // update hash location, if destination is reached and scrolling has stopped
+    // update when destination is reached and scrolling has stopped
     if( indexDest.id === indexAll[ indexCurrent ].id ){
         updateURL()
         // reset x position of main sections
@@ -377,8 +403,17 @@ function updateUI(){
 function updateTitle( ele ){
 
     const titleContainer = document.querySelector( '#ui-title' )
-    const title = ele.querySelector( 'h1' ).outerHTML
-    titleContainer.innerHTML = title
+    const titleContent = ele.querySelector( 'h1' ).outerHTML
+    titleContainer.innerHTML = titleContent
+
+    // conditional opacity transition
+//    if( indexCurrent === 0 ){ return }
+
+    titleContainer.style.opacity = 1;
+    // remove opacity after a delay
+    setTimeout( () => {
+        titleContainer.style.opacity = 0;
+    }, 1000 );
 
 }
 
@@ -419,7 +454,6 @@ function horizontalScroll(){
 
         // create a chain scrolling effect: for elements that are supposed to scroll normal 
         if( isScrollableElement && isAtBottom === false && isAtTop === false ){    
-            console.log( 'return' )
             return
         }
 
@@ -557,8 +591,6 @@ function checkScrollPosition(){
 
         const ele = event.target || event
         const threshold = 10 // to prevent bounce scrolling in safari
-        console.log( ele )
-        console.log( ele.scrollHeight - ele.scrollTop )
 
         // bottom
         if( ele.scrollHeight - ele.scrollTop - threshold <= ele.getBoundingClientRect().height ){
@@ -582,7 +614,6 @@ function checkScrollPosition(){
         const parentClassList = item.parentElement.classList
         if( parentClassList.contains( 'collab-content' ) ){
             item = item.parentElement
-            console.log( item )
         }
         // reset
         item.onscroll = null
@@ -599,4 +630,15 @@ function isTouchDevice() {
     return (('ontouchstart' in window) ||
         (navigator.maxTouchPoints > 0) ||
         (navigator.msMaxTouchPoints > 0));
+}
+
+
+// actions for initial page load
+function siteInit(){
+    
+    document.body.addEventListener( 'click', () => {
+
+        document.body.classList.add( 'initialized' )
+
+    }, { once: true } )
 }

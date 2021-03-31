@@ -85,7 +85,12 @@
 		</nav><!-- #site-navigation -->
 		<nav id="ms-language" >
 			<ul>
-				<?php pll_the_languages();?>
+				<?php
+				// pll functions must be checked for existance
+				 if( function_exists ( 'pll_the_languages' ) ){
+					 pll_the_languages();
+				 }
+				 ?>
 			</ul>
 		</nav><!-- #ms-language -->
 	</header><!-- #masthead -->
