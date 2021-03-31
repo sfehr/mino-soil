@@ -36,6 +36,7 @@
 // Initial page load
 let indexAll = '';
 let indexCurrent = 0;
+let indexPrevious = '';
 let indexDest = 0;
 let indexSub = '';
 let indexCurrentSub = 0;
@@ -295,9 +296,10 @@ function intersectionObserver(){
 		
 		entries.forEach( ( entry ) => {
 			
-            // 0.25 a deeper value has a higher tolerance (needed when element is bigger than viewport)
-			if ( entry.isIntersecting && entry.intersectionRatio >= 0.25 ){
-                
+            // intersectionRect is checking if an element at least covers half the viewport, 
+            // (for cases where entry is larger than vp)
+			if ( entry.isIntersecting && entry.intersectionRect.height >= ( ms_vh / 2 ) ){
+                    
                 // check if its a main section
                 if( entry.target.classList.contains( 'main' ) ){
                     indexCurrent = indexAll.indexOf( entry.target )
@@ -314,9 +316,8 @@ function intersectionObserver(){
                 if( indexOld !== indexCurrent ){
                     indexOld = indexCurrent
                     updateUI()
-
                 }                
-			}         
+            }     
 		});
 	}	
 }
@@ -378,6 +379,10 @@ function updateUI(){
     } else{ 
         document.body.classList.add( 'no-x-arrows' )
     }
+
+    // make sure to fire the below functionality only once per section
+    if( indexPrevious === indexCurrent ){ return }
+    indexPrevious = indexCurrent
 
     // update section title
     updateTitle( indexAll[ indexCurrent ] )

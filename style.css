@@ -1662,7 +1662,7 @@ svg{
 	.tmpl-collaborations_multiple .container-collaborators
 	{
 		height: auto;
-		overflow: unset;
+		overflow: auto;
 	}
 
 	.tmpl-teaser .container-media .itm-img,
