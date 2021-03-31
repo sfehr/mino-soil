@@ -445,8 +445,10 @@ function ms_custom_head( ) {
 		<script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>	
 	';
 
+	// EN font
+	echo '<link rel="stylesheet" href="https://use.typekit.net/wlv6frg.css">';
+
 	// JP font
-	/*
 	echo '
 		<script>
 	(function(d) {
@@ -459,7 +461,6 @@ function ms_custom_head( ) {
 	})(document);
 	</script>
 	';
-	*/
 
 	// Social Media
 	echo '
