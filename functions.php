@@ -446,7 +446,7 @@ function ms_custom_head( ) {
 	';
 
 	// EN font
-	echo '<link rel="stylesheet" href="https://use.typekit.net/wlv6frg.css">';
+	// echo '<link rel="stylesheet" href="https://use.typekit.net/wlv6frg.css">';
 
 	// JP font
 	echo '

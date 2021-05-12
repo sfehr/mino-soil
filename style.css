@@ -990,7 +990,7 @@ textarea {
 	/* typography */
 	--type-size-m: 26px;
 	--type-size-s: 13px;
-	--type-weight: 400;
+	--type-weight: 485;
 
 	/* ui */
 	--border-thin: 1.5px solid black;
@@ -999,6 +999,46 @@ textarea {
 	--grid-image-collapsed: repeat( auto-fit, minmax( 10px, 1fr ) );
 	--grid-column-w: 500px
 }
+
+
+/* Typeface
+--------------------------------------------- */
+/* LEGAL DISCLAIMER
+ *
+ * These Fonts are licensed only for use on these domains and their subdomains:
+ * minosoil.jp
+ *
+ * It is illegal to download or use them on other websites.
+ *
+ * While the @font-face statements below may be modified by the client, this
+ * disclaimer may not be removed.
+ *
+ * Optimo webfonts are protected by copyright law and provided under license. To modify, alter, translate, convert, decode or reverse engineer in any manner whatsoever, including converting the Font Software into a different format is strictly prohibited. The webfont files are not to be used for anything other than web font use.
+ *
+ * optimo.ch
+ */
+
+ @font-face {
+	font-family: 'Basel Grotesk';
+	src: url('./assets/Basel-Grotesk-Book.eot');
+	src: url('./assets/Basel-Grotesk-Book.eot?#iefix') format('embedded-opentype'),
+		 url('./assets/Basel-Grotesk-Book.woff2') format('woff2'),
+		 url('./assets/Basel-Grotesk-Book.woff') format('woff');
+	font-weight: 485;
+	font-style: normal;
+  }
+
+  @font-face {
+	font-family: 'Basel Grotesk';
+	src: url('./assets/Basel-Grotesk-Book-Italic.eot');
+	src: url('./assets/Basel-Grotesk-Book-Italic.eot?#iefix') format('embedded-opentype'),
+		 url('./assets/Basel-Grotesk-Book-Italic.woff2') format('woff2'),
+		 url('./assets/Basel-Grotesk-Book-Italic.woff') format('woff');
+	font-weight: 485;
+	font-style: italic;
+  }
+  
+
 
 /* Basic Styling
 --------------------------------------------- */
@@ -1011,7 +1051,7 @@ body{
 	line-height: 140%;
 	font-weight: var(--type-weight);
 	color: black;
-	font-family: neue-haas-grotesk-text;	
+	font-family: Basel Grotesk, sans-serif;
 
 	/* font antialising setting */
 	-moz-osx-font-smoothing: grayscale;
@@ -1269,6 +1309,27 @@ svg{
     grid-row: 1;
 }
 
+/* news */
+.ms-news{
+	position: absolute;
+	top: 0px;
+	display: flex;
+	width: 100%;
+	min-height: 40px;
+	border-bottom: 1px solid black;
+}
+
+.ms-news div{
+	display: inline-flex;
+	align-self: center;
+	height: 100%;
+	margin: 5px 15px;
+}
+
+.ms-news div p{
+	margin: 0;
+}
+
 /* Media
 --------------------------------------------- */
 
@@ -1304,6 +1365,7 @@ svg{
 .tmpl-chapter .container-media .itm-img img{
     height: 100%;
 	max-width: unset;
+	object-fit: cover;
 /*	transform: scale(100.5%); */
 }
 
@@ -1541,6 +1603,31 @@ svg{
 	line-height: initial;
 }
 
+/* title only collaborator entry */
+.tmpl-collaborator_title{
+	position: relative;
+	align-items: start;
+	width: 52px;
+}
+
+.tmpl-collaborator_title .collaborator-title{
+	position: relative;
+	height: calc( 100% - ( var(--logo-size-h) * 1.5 ) - 4px  );
+	transform: translateY(4px);
+	border-left: var(--border-thin);
+	margin-left: 5px;
+}
+
+.tmpl-collaborator_title .collaborator-title h2{
+	font-weight: var(--type-weight);
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	text-align: right;
+	writing-mode: sideways-lr;
+	margin: 0;
+	margin-left: 10px;
+}
+
 /* Contact template */
 .tmpl-contact .entry-content{
 	height: auto;
@@ -1648,8 +1735,6 @@ svg{
 		grid-row: auto;
 	}
 
-/*	.tmpl-teaser .container-media .itm-img,
-	.tmpl-teaser .container-text .entry-content, */
 	.entry-content,
 	.tmpl-collaborations_multiple .container-collaborators
 	{
@@ -1694,6 +1779,15 @@ svg{
 
 	#ui-title .entry-title{
 		left: calc( var(--logo-size-w) * 3 );
+	}
+
+	#home-logo, #home-logo, #home-logo {
+		-webkit-filter: drop-shadow( 5px 5px 4px rgba(0, 0, 0, 0.15) );
+		filter: drop-shadow( 5px 5px 4px rgba(0, 0, 0, 0.15) );
+	}
+
+	#home-logo svg, #home-logo img {
+		max-width: 95vw;
 	}
 
 	.container-text,
@@ -1747,6 +1841,29 @@ svg{
 
 	.collaborator .collab-part.collab-content {
 		height: auto;
+	}
+
+	.tmpl-collaborator_title .collaborator-title{
+		margin: 0;
+		transform: none;
+		border: none;
+		border-top: var(--border-thin);
+		padding-top: 10px;
+		padding-bottom: 20px;
+	}
+	
+	.tmpl-collaborator_title .collaborator-title h2{
+		writing-mode: initial;
+		text-align: left;
+		margin: 0;
+		letter-spacing: 0.01em;
+	}
+
+	.ms-news{
+		top: unset;
+		bottom: 0;
+		border: 0;
+		border-top: 1px solid black;
 	}
 	
 }   

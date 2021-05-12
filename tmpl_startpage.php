@@ -17,11 +17,12 @@ get_header( 'ms' );
 
 			$templateName = basename( get_page_template(), '.php' ); 
 
-			if( $templateName !== 'tmpl-collaborations_multiple' ) :
-				$templateName = 'tmpl-chapter'; // use 1 template for all page/post templates with conditionals
-			endif;	
-
-			get_template_part( 'template-parts/content', $templateName ); // choose template part by page/post template
+			if( 'tmpl-collaborations_multiple' === $templateName || 'tmpl-news' === $templateName ) :
+				get_template_part( 'template-parts/content', $templateName ); // choose specific template
+			else : 
+				get_template_part( 'template-parts/content', 'tmpl-chapter' ); // choose standard template
+			endif;
+			
 
 		endwhile; // End of the loop.
 		?>

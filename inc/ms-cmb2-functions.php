@@ -15,6 +15,7 @@
  *  
  * ms_images_metabox()
  * ms_svg_metabox()
+ * ms_news_metabox()
  *  
  */
 
@@ -96,4 +97,30 @@ function ms_svg_metabox() {
 	
 	//
 }
-	 
+
+
+
+/* NEWS METABOX
+*
+* [checkbox] visibility
+*
+*/
+add_action( 'cmb2_admin_init', 'ms_news_metabox' );
+
+function ms_news_metabox() {
+
+	// METABOX
+	$news = new_cmb2_box( array(
+		'id'            => 'ms_news_box',
+		'title'         => __( 'Visibility Options', ms_get_theme_text_domain() ),
+		'object_types'  => array( 'post', 'page' ), // Post type
+		'show_on'       => array( 'key' => 'page-template', 'value' => array( 'tmpl-news.php' ) ),
+	) );
+	
+	// CHECKBOX FIELD
+	$news->add_field( array(
+		'desc' => __( 'Show or hide this news post', ms_get_theme_text_domain() ),
+		'id'   => 'visibility',
+		'type' => 'checkbox',
+	) );
+}	 
