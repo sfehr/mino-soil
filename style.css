@@ -1324,6 +1324,7 @@ svg{
 	align-self: center;
 	height: 100%;
 	margin: 5px 15px;
+	gap: 12px;
 }
 
 .ms-news div p{
