@@ -1624,9 +1624,10 @@ svg{
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	text-align: right;
-	writing-mode: sideways-lr;
+	writing-mode: vertical-lr;
 	margin: 0;
 	margin-left: 10px;
+	transform: rotate(180deg);
 }
 
 /* Contact template */
