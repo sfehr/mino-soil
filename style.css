@@ -1775,7 +1775,7 @@ svg{
 	
 	/* sizing/positioning */
 	
-	.ui{
+	.ui:not( #ui-player ){
 		display: none;
 	}
 
@@ -1855,6 +1855,7 @@ svg{
 	}
 	
 	.tmpl-collaborator_title .collaborator-title h2{
+		transform: none;
 		writing-mode: initial;
 		text-align: left;
 		margin: 0;

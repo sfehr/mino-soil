@@ -401,6 +401,7 @@ function updateUI(){
     // init
     horizontalScroll()
     imageInterval()
+    displayMediaPlayer()
 }
 
 
@@ -646,4 +647,53 @@ function siteInit(){
         document.body.classList.add( 'initialized' )
 
     }, { once: true } )
+}
+
+
+// handles media player
+function displayMediaPlayer(){
+
+    const dataTitle = indexAll[ indexCurrent ].dataset.title
+    const player = indexAll[ indexCurrent ].querySelector( '.entry-content .ms-player-container' )
+    const UIplayer = document.querySelector( '#ui-player' )
+    displayHandler()
+    
+    function displayHandler(){
+        const UIplayerActive = UIplayer.querySelector( `.ms-player-container[data-title=\"${dataTitle}\"]` )
+
+        // hide all players
+        UIplayer.querySelectorAll( '.ms-player-container' ).forEach( item =>{
+            item.style.display = 'none'
+            //pausePlayer()
+        })
+
+        // show active player
+        if( UIplayerActive ){
+            UIplayerActive.style.display = 'block'
+        }
+    }
+
+    // initial move player to UI layer
+    if( player == null ) { return }
+    
+    player.dataset.title = dataTitle
+    UIplayer.appendChild( player )
+    displayHandler()
+}
+
+
+// mediaplayer element handler
+function pausePlayer() {
+
+    //mejs.players.mep_0.pause()
+    const players = mejs.players
+    console.log( players )
+
+    
+    Object.entries( players ).forEach( item =>{
+        console.log( item )
+        console.log( item.pause() )
+        item.pause()
+    })
+
 }

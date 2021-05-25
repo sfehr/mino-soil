@@ -46,6 +46,8 @@
 			<div class="ui-item arrow left"><?php echo wp_kses( $uiArrow, ms_get_kses_extended_ruleset() ); ?></div>
 			<div class="ui-item arrow right"><?php echo wp_kses( $uiArrow, ms_get_kses_extended_ruleset() ); ?></div>
 		</div><!-- #ui-panel-right -->
+
+		<div id="ui-player" class="ui"></div><!-- #ui-player -->
 	</div><!-- .ui-layer -->
 
 	<header id="masthead" class="site-header">

@@ -1,0 +1,38 @@
+
+.ms-player-container{
+    display: none;
+    position: fixed;
+    top: calc( var(--logo-size-h) * 1.5 );
+    right: calc( var(--logo-size-h) * 1 );
+    width: 60px !important; 
+    height: 60px !important;
+    border: 7px solid black;
+    border-radius: 50%;
+  }
+  
+  /* Player background */
+  .ms-player-container.mejs-container,
+  .ms-player-container .mejs-controls,
+  .ms-player-container .mejs-embed,
+  .ms-player-container .mejs-embed body {
+    background-color: transparent
+  }
+  
+  /* Player controls */
+  .ms-player-container .mejs-controls div,
+  .ms-player-container .mejs-controls a
+  {
+      display: none;
+  }
+  
+  .ms-player-container .mejs-controls .mejs-playpause-button{
+    display: initial;
+    transform: scale(2) translate(-3px, -1px);
+    filter: invert();
+  }
+
+  @media only screen and (max-width: 800px), (pointer: coarse) {
+    .ms-player-container{
+        transform: scale(0.85) translateY(-10px);
+    }
+  }

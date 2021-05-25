@@ -170,6 +170,11 @@ function mino_soil_scripts() {
 	// main JS
 	wp_enqueue_script( 'ms-scripts', get_template_directory_uri() . '/js/ms-scripts.js', array(), _S_VERSION, true );
 
+	// custom theme media player
+	wp_enqueue_style( 'ms-player', get_template_directory_uri() . '/css/ms-player.css', array(
+		'wp-mediaelement',
+	), '1.0' );
+
 }
 add_action( 'wp_enqueue_scripts', 'mino_soil_scripts' );
 
@@ -526,3 +531,29 @@ function ms_custom_img_sizes() {
 add_action( 'after_setup_theme', 'ms_custom_img_sizes' );
 
 
+
+/** SF:
+ * Add an HTML class to MediaElement.js container elements to aid styling.
+ * Extends the core _wpmejsSettings object to add a new feature via the MediaElement.js plugin API.
+ */
+function ms_mejs_add_container_class() {
+
+	if ( ! wp_script_is( 'mediaelement', 'done' ) ) {
+		return;
+	}
+	?>
+		<script>
+			(function() {
+				var settings = window._wpmejsSettings || {};
+				settings.features = settings.features || mejs.MepDefaults.features;
+				settings.features.push( 'exampleclass' );
+
+				MediaElementPlayer.prototype.buildexampleclass = function( player ) {
+					player.container.addClass( 'ms-player-container' );
+				};
+				
+			})();
+		</script>
+	<?php
+}
+add_action( 'wp_print_footer_scripts', 'ms_mejs_add_container_class' );
