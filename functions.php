@@ -16,6 +16,8 @@
 * ms_output_file_list()
 * ms_render_svg()
 * ms_get_kses_extended_ruleset()
+* ms_custom_wp_query()
+* ms_archive_wp_query()
 * ms_custom_menu_link_attributes()
 * ms_custom_attachment_image_attributes()
 * ms_custom_img_sizes()
@@ -236,7 +238,7 @@ function ms_modify_wp_query( $query ) {
 	if( $query->is_main_query() && is_home() ){	
 		
 		// VARS
-		$post_types = array( 'post', 'page' );
+		$post_types = array( 'post', 'page', 'news' );
 		
 		// QUERY SET
 		$query->set( 'post_type', $post_types );
@@ -381,6 +383,9 @@ function ms_custom_menu_link_attributes( $atts, $item, $args ){
 	// get values
 	$postID = url_to_postid( $atts[ 'href' ] );
 	$targetSlug = get_post_field( 'post_name', $postID );
+
+	// abort for news pos type
+	//if( 'news' === get_post_type( $postID ) ){ return $atts; }
 	
 	// set the desired attributes:
 	$atts[ 'class' ] = 'nav-item';
@@ -435,7 +440,47 @@ function ms_custom_wp_query(){
 	// RESPONSE
 	return $data;
 }
+/** SF:
+ * Custom WP query
+ *
+ * 
+ */
+function ms_archive_wp_query(){
 
+	// ARGS
+	$args[ 'post_type' ] = 'news';
+	$args[ 'posts_per_page' ] = -1;
+	$args[ 'post_status' ] = 'publish';
+/*	$args[ 'orderby' ] = 'date';
+	$args[ 'order' ] = 'asc'; */
+	
+	// LOOP
+	$ms_query = null;
+	$ms_query = new WP_Query( $args );
+	
+	ob_start();
+	if ( $ms_query->have_posts() ) :
+	
+		while( $ms_query->have_posts() ) : 
+
+			$ms_query->the_post();
+	
+				// SINGLE ($post_id)
+				get_template_part( 'template-parts/content', 'archive' );
+
+		endwhile;
+		wp_reset_postdata();
+	
+	else :
+		get_template_part( 'template-parts/content', 'none' );
+	
+ 	endif;
+	$data = ob_get_contents();
+	ob_end_clean();
+
+	// RESPONSE
+	return $data;
+}
 
 
 /** SF:

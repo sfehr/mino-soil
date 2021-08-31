@@ -17,7 +17,10 @@ get_header( 'ms' );
 
 			$templateName = basename( get_page_template(), '.php' ); 
 
-			if( 'tmpl-collaborations_multiple' === $templateName || 'tmpl-news' === $templateName ) :
+			// select pages by template
+			if( 'news' == get_post_type() ) : 
+				get_template_part( 'template-parts/content', 'tmpl-news' ); // select posts by post type
+			elseif( 'tmpl-collaborations_multiple' === $templateName || 'tmpl-archive_multiple' === $templateName ) :
 				get_template_part( 'template-parts/content', $templateName ); // choose specific template
 			else : 
 				get_template_part( 'template-parts/content', 'tmpl-chapter' ); // choose standard template
@@ -26,6 +29,11 @@ get_header( 'ms' );
 
 		endwhile; // End of the loop.
 		?>
+
+	<?php 
+		// global media player
+		echo do_shortcode( '[audio src="http://minosoil.jp/wp/wp-content/uploads/2021/05/2105013-minosoil_1Material.wav"]' ) 
+	?>		
 
 	</main><!-- #main -->
 

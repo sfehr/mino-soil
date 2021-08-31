@@ -1,13 +1,9 @@
 
 .ms-player-container{
-    display: none;
-    position: fixed;
-    top: calc( var(--logo-size-h) * 1.5 );
-    right: calc( var(--logo-size-h) * 1 );
+    display: block;
+    right: calc( var(--logo-size-h) * 0.5 );
     width: 60px !important; 
     height: 60px !important;
-    border: 7px solid black;
-    border-radius: 50%;
   }
   
   /* Player background */
@@ -27,8 +23,16 @@
   
   .ms-player-container .mejs-controls .mejs-playpause-button{
     display: initial;
-    transform: scale(2) translate(-3px, -1px);
-    filter: invert();
+    transform: scale(2.3) translateX(3px);
+    background: url( '../assets/ms-sound.svg' ) no-repeat;
+  }
+
+  .ms-player-container .mejs-controls .mejs-playpause-button.mejs-pause{
+    background: url( '../assets/ms-sound-on.svg' ) no-repeat;
+  }
+
+  .ms-player-container .mejs-controls .mejs-playpause-button button{
+    background: none;
   }
 
   @media only screen and (max-width: 800px), (pointer: coarse) {

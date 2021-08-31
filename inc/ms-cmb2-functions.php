@@ -113,13 +113,13 @@ function ms_news_metabox() {
 	$news = new_cmb2_box( array(
 		'id'            => 'ms_news_box',
 		'title'         => __( 'Visibility Options', ms_get_theme_text_domain() ),
-		'object_types'  => array( 'post', 'page' ), // Post type
-		'show_on'       => array( 'key' => 'page-template', 'value' => array( 'tmpl-news.php' ) ),
+		'object_types'  => array( 'news' ), // News post type
+		// 'show_on'       => array( 'key' => 'page-template', 'value' => array( 'tmpl-news.php' ) ),
 	) );
 	
 	// CHECKBOX FIELD
 	$news->add_field( array(
-		'desc' => __( 'Show or hide this news post', ms_get_theme_text_domain() ),
+		'desc' => __( 'Show  this news post in startpage', ms_get_theme_text_domain() ),
 		'id'   => 'visibility',
 		'type' => 'checkbox',
 	) );

@@ -1,8 +1,8 @@
 <?php
 /**
- * Template for displaying the brand story
- * Template Name: News
- * Template Post Type: news
+ * Template for displaying the collaborators summary
+ * Template Name: Archive Multiple
+ * Template Post Type: page
  *
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
@@ -11,6 +11,7 @@
  */
 
 get_header();
+
 ?>
 
 	<main id="primary" class="site-main">

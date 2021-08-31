@@ -1,10 +1,3 @@
-/* plus alpha:
-    - overview animation / calculation
-    - logo animation
-    - arrow micro interaction
-    - sound
-*/
-
 /*
 *
 * Initial page load
@@ -29,6 +22,7 @@
 * checkScrollPosition()
 * isTouchDevice()
 * siteInit()
+* msNewsContainer()
 *
 */
 
@@ -53,6 +47,7 @@ document.addEventListener(　'DOMContentLoaded', (　event　) => {
     updateUI()
     imageDimension()
     checkScrollPosition()
+    msNewsContainer()
     
 }, false );
 
@@ -401,7 +396,7 @@ function updateUI(){
     // init
     horizontalScroll()
     imageInterval()
-    displayMediaPlayer()
+    //displayMediaPlayer()
 }
 
 
@@ -651,6 +646,7 @@ function siteInit(){
 
 
 // handles media player
+/*
 function displayMediaPlayer(){
 
     const dataTitle = indexAll[ indexCurrent ].dataset.title
@@ -680,6 +676,7 @@ function displayMediaPlayer(){
     UIplayer.appendChild( player )
     displayHandler()
 }
+*/
 
 
 // mediaplayer element handler
@@ -695,5 +692,24 @@ function pausePlayer() {
         console.log( item.pause() )
         item.pause()
     })
+
+}
+
+
+// creates a container div for news entry
+function msNewsContainer(){
+    const siteMain = document.querySelector( '.site-main' )
+    const newsContainer = document.createElement( 'DIV' )
+    const newsEntries = document.querySelectorAll( '.ms-news' )
+
+    if( newsEntries.length == 0 ){ return }
+
+    newsContainer.classList.add( 'ms-news-container' )
+    newsEntries.forEach( ( entry ) => {
+        newsContainer.appendChild( entry )
+    })
+
+    siteMain.appendChild( newsContainer )
+
 
 }

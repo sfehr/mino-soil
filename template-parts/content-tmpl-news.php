@@ -11,10 +11,8 @@ if ( get_post_meta( get_the_ID(), 'visibility', 1 ) ) :
 
 	?>
 	<div class="ms-news">
-		<div>
-			<?php echo get_the_content(); ?>
-		</div>
-	</div>	
+		<?php echo get_the_content(); ?>
+	</div>
 	<?php
 
 endif;
