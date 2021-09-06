@@ -23,7 +23,7 @@
   
   .ms-player-container .mejs-controls .mejs-playpause-button{
     display: initial;
-    transform: scale(2.3) translateX(3px);
+    transform: scale(2.3) translateX(-3px);
     background: url( '../assets/ms-sound.svg' ) no-repeat;
   }
 
