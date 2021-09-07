@@ -1892,9 +1892,10 @@ svg{
 	}
 
 	.container-archive .news{
+		grid-row: unset;
 		border-top: 1px solid black;
 		border-left: unset;
-	}	
+	}
 	
 }   
 
