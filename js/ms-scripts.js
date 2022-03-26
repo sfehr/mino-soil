@@ -23,6 +23,7 @@
 * isTouchDevice()
 * siteInit()
 * msNewsContainer()
+* msCollaboratorMenu()
 *
 */
 
@@ -39,7 +40,7 @@ let ms_vh = Math.max( document.documentElement.clientHeight || 0, window.innerHe
 let imageClock = '';
 let scrollableElements = [ 'p', 'collab-content' ]
 
-document.addEventListener(　'DOMContentLoaded', (　event　) => {
+document.addEventListener( 'DOMContentLoaded', ( event ) => {
 	
     siteInit()
     createSiteIndex()
@@ -48,12 +49,13 @@ document.addEventListener(　'DOMContentLoaded', (　event　) => {
     imageDimension()
     checkScrollPosition()
     msNewsContainer()
+    msCollaboratorMenu()
     
 }, false );
 
 
 // Resize events
-window.addEventListener(　'resize', (　event　) => {
+window.addEventListener( 'resize', ( event ) => {
     
     // update viewport dimensions
     ms_vw = Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 );
@@ -684,12 +686,9 @@ function pausePlayer() {
 
     //mejs.players.mep_0.pause()
     const players = mejs.players
-    console.log( players )
 
     
     Object.entries( players ).forEach( item =>{
-        console.log( item )
-        console.log( item.pause() )
         item.pause()
     })
 
@@ -711,5 +710,37 @@ function msNewsContainer(){
 
     siteMain.appendChild( newsContainer )
 
+
+}
+
+
+// handles the collaborator sub menu, collabse and expand function
+function msCollaboratorMenu(){
+    const collaborators  = document.querySelectorAll( '[data-taxonomy]' ) 
+
+    if( collaborators.length == 0 ){ return }
+ 
+    const toggleEntries = ( e ) => {
+        const collaboratorTitle = e.target.closest( '.tmpl-collaborator_title' )
+        const taxonomy = collaboratorTitle.dataset.taxonomy
+        const relatedEntries = document.querySelectorAll( `[data-taxonomy="${taxonomy}"]` )
+        relatedEntries.forEach( ( item => {
+            item.dataset.showEntrie = item.dataset.showEntrie === 'hide' ? 'show' : 'hide'
+            if( item.dataset.showEntrie === 'hide' ){ 
+                item.classList.remove( 'unfolded' )
+             }
+        }))
+
+        // recalculate scroll dimensions
+        horizontalScroll()
+    }
+
+    // initialising
+    collaborators.forEach( ( item ) => {
+        item.dataset.showEntrie = 'hide'
+
+        if( !item.classList.contains( 'tmpl-collaborator_title' ) ){ return }
+        item.addEventListener( 'click', toggleEntries )
+    })    
 
 }

@@ -9,11 +9,12 @@
 
 $templateName = basename( get_page_template(), '.php' );
 $mediaImages = ms_output_file_list( 'imgs', '' );
+$postTerms = wp_get_post_terms( $post->ID, 'tax_collaborator', array( 'fields' => 'slugs' ) );
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( $templateName ); ?> data-title="<?php echo get_post_field( 'post_name', get_the_ID() ); ?>">
+<article id="post-<?php the_ID(); ?>" <?php post_class( $templateName ); ?> data-title="<?php echo get_post_field( 'post_name', get_the_ID() ); ?>" data-taxonomy="<?php echo implode( ',', $postTerms ); ?>">
 
-	<?php 
+	<?php
 	// print this block only when images are set
 	if( !empty( $mediaImages ) ) : 
 	?>

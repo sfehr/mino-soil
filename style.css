@@ -1637,6 +1637,14 @@ svg{
 	transform: rotate(180deg);
 }
 
+/* collabse, expand collaborator */
+.container-collaborators [data-show-entrie="hide"]{
+	width: 0;
+}
+.container-collaborators .tmpl-collaborator_title[data-show-entrie="hide"]{
+	width: initial;
+}
+
 /* Contact template */
 .tmpl-contact .entry-content{
 	height: auto;
