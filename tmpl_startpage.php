@@ -32,7 +32,8 @@ get_header( 'ms' );
 
 	<?php 
 		// global media player
-		echo do_shortcode( '[audio src="http://minosoil.jp/wp/wp-content/uploads/2021/05/2105013-minosoil_1Material.wav"]' ) 
+		//echo do_shortcode( '[audio src="http://minosoil.jp/wp/wp-content/uploads/2021/05/2105013-minosoil_1Material.wav"]' ) // 1st
+		echo do_shortcode( '[audio src="http://minosoil.jp/wp/wp-content/uploads/2022/03/20220327-minosoil_techniq_webexhibit2.wav"]' )  // 2nd
 	?>		
 
 	</main><!-- #main -->
