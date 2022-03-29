@@ -1642,7 +1642,9 @@ svg{
 .container-collaborators [data-show-entrie="hide"]{
 	max-width: 0;
 }
-.container-collaborators .tmpl-collaborator_title[data-show-entrie="hide"]{
+.container-collaborators .tmpl-collaborator_title[data-show-entrie="hide"],
+.container-collaborators [data-taxonomy="general_layer"]
+{
 	max-width: unset;
 }
 
@@ -1913,7 +1915,9 @@ svg{
 		width: 95vw;
 		max-height: 0;
 	}
-	.container-collaborators .tmpl-collaborator_title[data-show-entrie="hide"]{
+	.container-collaborators .tmpl-collaborator_title[data-show-entrie="hide"],
+	.container-collaborators [data-taxonomy="general_layer"]
+	{
 		max-height: unset;
 	}	
 	
